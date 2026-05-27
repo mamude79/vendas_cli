@@ -5,9 +5,8 @@ import pandas
 from babel.numbers import format_currency
 from pandas import Series
 
-from output import json, table
-
 from log import logger
+from output import json, table
 
 SCHEMA: dict = {"id": str, "date": str, "product": str, "quantity": int, "price": str}
 CHUNK_SIZE: int = 1000

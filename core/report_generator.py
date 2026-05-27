@@ -1,6 +1,7 @@
 import argparse
-from parse import parse_file
+
 from log import logger
+from parse import parse_file
 
 
 def report(args: argparse.Namespace) -> None:

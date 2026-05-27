@@ -2,8 +2,9 @@
 Testes unitários para report_generator.py
 """
 
-import pytest
 from argparse import Namespace
+
+import pytest
 
 
 class TestReportGenerator:

@@ -1,7 +1,8 @@
 import json
+from typing import List
+
 import numpy as np
 import pandas as pd
-from typing import List
 from pandas import Series
 
 from log import logger
@@ -27,7 +28,7 @@ def print_json(series: List[Series]) -> None:
             if mask_nan.any():
                 clean_series[mask_nan] = None
             json_output.append(json.dumps(clean_series.to_dict()))
-        
+
         logger.info(json.dumps(json_output, indent=2))
     except Exception:
         logger.error("### FAILED TO PARSE JSON!!! ###")
