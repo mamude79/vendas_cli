@@ -88,8 +88,7 @@ class TestParseFile:
         with caplog.at_level("ERROR", logger="vendas cli"):
             pf.read_data(args)
         # Verificar que a mensagem de advertência foi emitida
-        assert any("INVÁLIDO!!" in record.message for record in caplog.records
-        )
+        assert any("INVÁLIDO!!" in record.message for record in caplog.records)
 
     def test_read_data_empty_file(self, caplog):
         """Testa com arquivo vazio.

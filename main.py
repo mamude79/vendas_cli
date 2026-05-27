@@ -4,11 +4,6 @@ import locale
 from core.report_generator import report
 from log import logger
 
-try:
-    locale.setlocale(locale.LC_ALL, "pt_BR.UTF-8")
-except locale.Error, UnicodeError:
-    pass
-
 
 def main():
     parse = argparse.ArgumentParser(prog="vendas_cli")
