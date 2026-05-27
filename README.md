@@ -16,15 +16,11 @@ uv sync
 
 ```bash
 python main.py --input produtos.csv --format text
-```
-```bash
-python main.py --input produtos.csv --format json
-```
-```bash
-python main.py --input produtos.csv --format text --start 2026-01-01 --end 2026-06-01
-```
 
-```bash
+python main.py --input produtos.csv --format json
+
+python main.py --input produtos.csv --format text --start 2026-01-01 --end 2026-06-01
+
 python main.py --input produtos.csv --format json --start 2026-01-01 --end 2026-06-01
 ```
 
