@@ -7,7 +7,9 @@ requires-python = ">=3.14"
 dependencies = [
     "babel>=2.18.0",
     "black>=26.5.1",
+    "coverage>=7.14.1",
     "isort>=8.0.1",
     "pandas>=3.0.3",
+    "pytest>=9.0.3",
     "tabulate>=0.10.0",
 ]
