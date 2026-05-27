@@ -2,6 +2,7 @@ import argparse
 from parse import parse_file
 from log import logger
 
+
 def report(args: argparse.Namespace) -> None:
     if args.format == "text":
         _report_text_output(args)

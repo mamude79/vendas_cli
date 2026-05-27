@@ -47,21 +47,32 @@ def read_data(args: argparse.Namespace) -> None:
 
         # Informa o valor total de todas as vendas
         logger.info(
-            "Valor total de todas as vendas: {}".format(format_currency(total_sales, "BRL"))
+            "Valor total de todas as vendas: {}".format(
+                format_currency(total_sales, "BRL")
+            )
         )
         # Ordena e pegar o produto mais vendido
-        sorted_products = sorted(product_totals.items(), key=lambda x: x[1], reverse=True)
+        sorted_products = sorted(
+            product_totals.items(), key=lambda x: x[1], reverse=True
+        )
         best_product = sorted_products[0][0] if sorted_products else ""
         max_quantity = sorted_products[0][1] if sorted_products else 0
 
         logger.info("Produto mais vendido: {} - {}".format(best_product, max_quantity))
-    except (Exception, AttributeError):
+    except AttributeError, Exception:
         logger.error("### FORMATO DO CSV INVÁLIDO!!! ###")
 
 
 def _add_calculations(row: Series) -> Series:
-    row["current_price"] = format_currency(row.price, currency="BRL", locale="pt_BR", format="R$ #,##0.##")
-    row["total_sales"] = format_currency(float(row.price) * row.quantity, currency="BRL", locale="pt_BR", format="R$ #,##0.##")
+    row["current_price"] = format_currency(
+        row.price, currency="BRL", locale="pt_BR", format="R$ #,##0.##"
+    )
+    row["total_sales"] = format_currency(
+        float(row.price) * row.quantity,
+        currency="BRL",
+        locale="pt_BR",
+        format="R$ #,##0.##",
+    )
     return row
 
 
@@ -69,9 +80,8 @@ def _sum_total_sales(row: Series) -> float:
     return float(row.price) * row.quantity
 
 
-def _get_product_groupby_sales(row: Series, product_totals: dict):
+def _get_product_groupby_sales(row: Series, product_totals: dict) -> None:
     if row["quantity"] > 0 and pandas.notna(row["quantity"]):
         product = row["product"]
         current_total = product_totals.get(product, 0)
         product_totals[product] = current_total + int(row["quantity"])
-        return product_totals
