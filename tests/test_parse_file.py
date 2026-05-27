@@ -118,8 +118,8 @@ class TestParseFile:
         from parse import parse_file as pf
 
         # Definir um intervalo passado (2020 a 2021)
-        start_date = "2020-01-01"
-        end_date = "2021-01-01"
+        start_date = "2025-01-01"
+        end_date = "2025-06-22"
 
         args = argparse.Namespace(
             input="produtos_mock.csv",
@@ -199,7 +199,7 @@ class TestParseFile:
         from parse import parse_file as pf
 
         args = argparse.Namespace(
-            input="produtos.csv",
+            input="produtos_mock.csv",
             start=None,
             end=None,
             format="text",
