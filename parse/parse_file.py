@@ -1,16 +1,13 @@
 import argparse
-import logging
 from collections import defaultdict
-from functools import total_ordering
 
 import pandas
 from babel.numbers import format_currency
 from pandas import Series
 
+from output import json, table
 
-from output import table, json
-
-logger = logging.getLogger(__name__)
+from log import logger
 
 SCHEMA: dict = {"id": str, "date": str, "product": str, "quantity": int, "price": str}
 CHUNK_SIZE: int = 1000
@@ -48,7 +45,9 @@ def read_data(args: argparse.Namespace) -> None:
         json.print_json(rows)
 
     # Informa o valor total de todas as vendas
-    logger.info("Valor total de todas as vendas: {}".format(format_currency(total_sales, "BRL")))
+    logger.info(
+        "Valor total de todas as vendas: {}".format(format_currency(total_sales, "BRL"))
+    )
     # Ordena e pegar o produto mais vendido
     sorted_products = sorted(product_totals.items(), key=lambda x: x[1], reverse=True)
     best_product = sorted_products[0][0] if sorted_products else ""
@@ -56,17 +55,20 @@ def read_data(args: argparse.Namespace) -> None:
 
     logger.info("Produto mais vendido: {} - {}".format(best_product, max_quantity))
 
+
 def _add_calculations(row: Series) -> Series:
-    row["current_price"] = format_currency(row.price, "BRL")
-    row["total_sales"] = format_currency(float(row.price) * row.quantity, "BRL")
+    row["current_price"] = format_currency(row.price, currency="BRL", locale="pt_BR", format="R$ #,##0.##")
+    row["total_sales"] = format_currency(float(row.price) * row.quantity, currency="BRL", locale="pt_BR", format="R$ #,##0.##")
     return row
+
 
 def _sum_total_sales(row: Series) -> float:
     return float(row.price) * row.quantity
+
 
 def _get_product_groupby_sales(row: Series, product_totals: dict):
     if row["quantity"] > 0 and pandas.notna(row["quantity"]):
         product = row["product"]
         current_total = product_totals.get(product, 0)
-        product_totals[product] = current_total + int(row['quantity'])
+        product_totals[product] = current_total + int(row["quantity"])
         return product_totals

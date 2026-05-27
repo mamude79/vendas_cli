@@ -1,10 +1,6 @@
 import argparse
-import logging
-
 from parse import parse_file
-
-logger = logging.getLogger(__name__)
-
+from log import logger
 
 def report(args: argparse.Namespace) -> None:
     if args.format == "text":

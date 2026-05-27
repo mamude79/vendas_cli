@@ -1,12 +1,13 @@
-import logging
-from typing import List, Any, Tuple
 
+from typing import List
+
+from pandas import Series
 from tabulate import tabulate
 
-logger = logging.getLogger(__name__)
+from log import logger
 
 
-def print_table(series: List[Tuple[Any]]) -> None:
+def print_table(series: List[Series]) -> None:
     rows: list = []
 
     # formatar a saida final para tabela
