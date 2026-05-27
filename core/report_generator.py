@@ -5,6 +5,7 @@ from parse import parse_file
 
 logger = logging.getLogger(__name__)
 
+
 def report(args: argparse.Namespace) -> None:
     if args.format == "text":
         _report_text_output(args)
@@ -16,9 +17,11 @@ def report(args: argparse.Namespace) -> None:
 
 def _report_text_output(args: argparse.Namespace) -> None:
     logger.info("Relatório em formato tabela")
+    logger.info("Processando...")
     parse_file.read_data(args)
 
 
 def _report_json_output(args: argparse.Namespace) -> None:
     logger.info("Relatório em formato json")
-    logger.info(args.input)
+    logger.info("Processando...")
+    parse_file.read_data(args)

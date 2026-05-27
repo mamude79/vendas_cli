@@ -5,13 +5,41 @@ from datetime import datetime, timedelta
 
 def generate_random_product():
     """Gera um nome de produto aleatório."""
-    categories = ["Eletrônicos", "Roupas", "Alimentos", "Livros",
-                  "Móveis", "Esportes", "Beleza", "Autopeças"]
+    categories = [
+        "Eletrônicos",
+        "Roupas",
+        "Alimentos",
+        "Livros",
+        "Móveis",
+        "Esportes",
+        "Beleza",
+        "Autopeças",
+    ]
 
-    adjectives = ["Premium", "Pro", "Elite", "Ultra", "Basic", "Smart",
-                  "Eco", "Mini", "Maxi", "Giga"]
-    nouns = ["Fone", "Tênis", "Café", "Dicionário", "Sofá", "Bicicleta",
-             "Crema", "Kit", "Set", "Pack"]
+    adjectives = [
+        "Premium",
+        "Pro",
+        "Elite",
+        "Ultra",
+        "Basic",
+        "Smart",
+        "Eco",
+        "Mini",
+        "Maxi",
+        "Giga",
+    ]
+    nouns = [
+        "Fone",
+        "Tênis",
+        "Café",
+        "Dicionário",
+        "Sofá",
+        "Bicicleta",
+        "Crema",
+        "Kit",
+        "Set",
+        "Pack",
+    ]
 
     return f"{random.choice(adjectives)} {random.choice(nouns)} {random.randint(1, 99)}"
 
@@ -40,7 +68,7 @@ def generate_csv(filename="produtos.csv", num_records=10000):
 
     fieldnames = ["id", "date", "product", "quantity", "price"]
 
-    with open(filename, mode='w', newline='', encoding='utf-8') as file:
+    with open(filename, mode="w", newline="", encoding="utf-8") as file:
         writer = csv.DictWriter(file, fieldnames=fieldnames)
 
         # Escreve cabeçalho
@@ -53,7 +81,7 @@ def generate_csv(filename="produtos.csv", num_records=10000):
                 "date": generate_random_date(),
                 "product": generate_random_product(),
                 "quantity": generate_random_quantity(),
-                "price": f"{generate_random_price():.2f}"  # Preço com 2 casas decimais
+                "price": f"{generate_random_price():.2f}",  # Preço com 2 casas decimais
             }
             writer.writerow(record)
 
