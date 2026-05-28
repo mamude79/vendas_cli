@@ -1,5 +1,4 @@
 import argparse
-import locale
 
 from core.report_generator import report
 from log import logger

@@ -47,7 +47,7 @@ def read_data(args: argparse.Namespace) -> None:
         # Informa o valor total de todas as vendas
         logger.info(
             "Valor total de todas as vendas: {}".format(
-                format_currency(total_sales, "BRL")
+                format_currency(total_sales, currency="BRL", locale="pt_BR", format="R$ #,##0.##")
             )
         )
         # Ordena e pegar o produto mais vendido
@@ -58,8 +58,9 @@ def read_data(args: argparse.Namespace) -> None:
         max_quantity = sorted_products[0][1] if sorted_products else 0
 
         logger.info("Produto mais vendido: {} - {}".format(best_product, max_quantity))
-    except AttributeError, Exception:
+    except (AttributeError, Exception) as err:
         logger.error("### FORMATO DO CSV INVÁLIDO!!! ###")
+        logger.error(err)
 
 
 def _add_calculations(row: Series) -> Series:
